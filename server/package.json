@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "dotenv -e .env -- node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "dotenv-cli": "^8.0.0"
+  },
+  "dependencies": {
+    "nodemon": "^3.1.10",
+    "url": "^0.11.4"
+  }
+}
