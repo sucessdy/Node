@@ -1,15 +1,17 @@
-const http = require("http");
-const math =  require('./math')
-const PORT = 4000;
-const server = http.createServer((req, res) => {
-
-
-   res.setHeader("Content-Type", "text/plain");
-   console.log( "mutliple" , math.multiplyFn(2, 9))
-  res.end("Hello world");
-
+const newPromise = new Promise((resolve, reject) => {
+  const sucess = true;
+  if (sucess) {
+    console.log("Promise is resolved");
+       resolve("✅ Everything went well!");
+  } else {
+    console.log("something went wrong");
+    reject("❌ Reject")
+  }
 });
 
-server.listen(PORT, () => {
-  console.log(`hello world ${PORT}`);
-});
+newPromise
+  .then((result) => console.log( "THEN" , result))
+  .catch((error) => console.error( "ERROR ", error))
+  .finally(() => {
+    console.log("The promise has completed");
+  });

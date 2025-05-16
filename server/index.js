@@ -12,16 +12,18 @@ const server = http.createServer((req, res) => {
   if (req.url == "/.well-known/appspecific/com.chrome.devtools.json")
     return res.end();
 
-  const log = `${Date.now()} :${req.url}  New Request is coming!!\n`;
+  const log = `${Date.now()} : ${req.method} : ${
+    req.url
+  }  New Request is coming!!\n`;
 
   const myUrl = url.parse(req.url, true);
 
-  console.log(myUrl);
+  // console.log(myUrl);
 
   fs.appendFile("log.txt", log, (err, data) => {
     switch (myUrl.pathname) {
       case "/":
-        res.end("<h1> Home Page </h1>");
+        if (req.method === "GET")   res.end("<h1> Home Page </h1>");
 
         break;
       case "/about":
@@ -30,16 +32,21 @@ const server = http.createServer((req, res) => {
 
         break;
 
-        case  '/search' : 
-        const search = myUrl.query.search_query; 
-        res.end(`<h1> Search the Query ${search} </h1>  `)
+      case "/search":
+        const search = myUrl.query.search_query;
+        res.end(`<h1> Search the Query ${search} </h1>  `);
         break;
       case "/contact":
         res.end("<h1> Contact Page </h1>");
 
         break;
 
-      default:
+        case "/signup": 
+        if (req.method === "GET"  )  res.end("This is a Sign up form"); 
+        else if (req.method === "POST" ) {
+           res.end("Sucess")
+        }
+       default:
         res.end("<h1>404 :(  </h1>");
         break;
     }
